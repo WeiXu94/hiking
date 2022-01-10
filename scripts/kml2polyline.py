@@ -84,4 +84,4 @@ if __name__ == "__main__":
     generator.sync_from_kml_track(track)
     activities_list = generator.loadForMapping()
     with open(JSON_FILE, "w") as json_file:
-        json.dump(activities_list, json_file)
+        json.dump(activities_list, json_file, indent=0)
