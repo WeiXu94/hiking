@@ -1,0 +1,47 @@
+[
+{
+"run_id": 1602902265000,
+"name": "Saturday Hiking",
+"distance": 12064.462228594197,
+"moving_time": "4:07:53",
+"type": "",
+"start_date": "2020-10-17 02:37:45",
+"start_date_local": "2020-10-17 10:37:45",
+"location_country": "\u77f3\u58c1\u8b66\u5d17 Shek Pik Police Stand, \u5dbc\u5357\u9053 South Lantau Road, \u77f3\u58c1 Shek Pik, \u96e2\u5cf6\u5340 Islands District, \u65b0\u754c New Territories, \u9999\u6e2f Hong Kong, \u4e2d\u56fd",
+"summary_polyline": "i_tfC_xdvTD}Ay@}BCsAHoAtA_De@wFsAeCaA{EqEeGgBD[kBsDi@}@j@a@IPkH_@cCoBeE_BkAN`@e@zAL`By@jAgCmBwAGs@dAkASqCVk@f@kBGmAdD[nDqAl@_C_@kEoVq@`AaBpHTxFSvBWFoFeGqAeC}@oIb@gCCgBsAaASuAv@aCqBeG{@gF{BeD_ByDLKMb@`@RsAkAiACqAs@k@aAsCy@s@Da@g@{A|@aG`Aa@E[uAgAk@k@fEeB`CSvB}B^y@bBUhCkBnBsBDaGtB}DA[VHdB{BhAl@`Ao@q@}ClCw@dCI`Dy@hBt@|E{B~AQtG}BvB}@QOr@`@`Cj@rAHSIz@C_ASx@c@DWjDaFtF`@lDuAkA[Z{CqA{@kFeAqCcBaBgA[Jy@Yq@mCo@Qe@gAN_B{@}AGuEFwB|@{ASsAw@iAAsBwAyBl@gBg@kHmDkHuBq^ub@{_@_b@}@kBwIuJxA{Fi@eCp@]lEBbBsEAoA{Cl@yA[s@u@?y@j@uAGmCd@wAI{@fCcAI{@p@}@u@uCd@}@AoAc@s@FsA\\sBbB{@PmAMiB{BgEjCgBo@qDj@a@KqA",
+"average_heartrate": null,
+"average_speed": 0.8111653485237811,
+"source": "TrailWatch.HK - http://www.trailwatch.hk",
+"streak": 1
+},
+{
+"run_id": 1642661391000,
+"name": "Thursday Hiking",
+"distance": 7319.164547829045,
+"moving_time": "2:34:14",
+"type": "",
+"start_date": "2022-01-20 06:49:51",
+"start_date_local": "2022-01-20 14:49:51",
+"location_country": "\u9f8d\u74b0\u95a3 Lung Wan House, \u9f8d\u87e0\u8857 Lung Poon Street, \u5927\u78e1 Tai Hom, \u947d\u77f3\u5c71 Diamond Hill, \u9ec3\u5927\u4ed9\u5340 Wong Tai Sin District, \u4e5d\u9f8d Kowloon, \u9999\u6e2f Hong Kong, \u4e2d\u56fd",
+"summary_polyline": "emjgCwy_xT{@u@yBW_Ao@eASc@TmAlD^~Cu@`AkA`@\\zAeANmApBXfA]XoB@m@_@eAd@]bFLdBmEjAmBo@y@FwA^sE|CaAAMv@kA~@eB^p@sAg@~B^~@vA?iAVu@oAh@Zy@eBEiDu@{@uAUiCdBsDy@tAgHU_BaB}@}GC[]b@iAIe@}AIiCiCNkAqAa@u@ZXC[Qt@Aa@jEfAdBu@nAU~AKnFThAg@pDRjAuC|DwAd@C`AxCdBBv@dBj@VpCfB\\dA|@iCpEzBhAm@bAXhCkA`AKx@|BYxChBpDRz@dD`AbANdBKqAkA_Bu@wCgDSgDkBmB\\I`@p@TrC~FGd@rAhBM|ERnA[v@s@VR`A[[wAzA{@dDeCbDwCn@{DiDgAIQy@m@[}CbAsGc@wEz@iAu@w@XeE_@eDtAc@r@",
+"average_heartrate": null,
+"average_speed": 0.7909190131650146,
+"source": "TrailWatch.HK - http://www.trailwatch.hk",
+"streak": 1
+},
+{
+"run_id": 1642673451000,
+"name": "Thursday Hiking",
+"distance": 2017.0991192396975,
+"moving_time": "0:40:25",
+"type": "",
+"start_date": "2022-01-20 10:10:51",
+"start_date_local": "2022-01-20 18:10:51",
+"location_country": "\u9577\u5b8f\u90a8\u505c\u8eca\u5834 Cheung Wang Estate Car Park, \u5bee\u809a\u8def Liu To Road, \u64d4\u6746\u5c71 Tam Kon Shan, \u9752\u8863\u589f Tsing Yi Hui, \u9752\u8863 Tsing Yi, \u8475\u9752\u5340 Kwai Tsing District, \u65b0\u754c New Territories, \u9999\u6e2f Hong Kong, \u4e2d\u56fd",
+"summary_polyline": "iwmgCabkwT`B~B`CF`AxAAnAh@`AQtElAvAPhEcAvBd@bAEz@~AxB`EuBr@FuBaEiBmAQw@}@o@_@}A_AiAKyCb@eAq@_AYeCe@i@{BE{AeB^oHl@OLy@bAb@",
+"average_heartrate": null,
+"average_speed": 0.831793451232865,
+"source": "TrailWatch.HK - http://www.trailwatch.hk",
+"streak": 1
+}
+]
