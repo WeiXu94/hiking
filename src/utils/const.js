@@ -11,7 +11,7 @@ const MUNICIPALITY_CITIES_ARR = [
 ];
 
 // IF you outside China please make sure IS_CHINESE = false
-const IS_CHINESE = true;
+const IS_CHINESE = false;
 const USE_ANIMATION_FOR_GRID = false;
 const CHINESE_INFO_MESSAGE = (yearLength, year) =>
   `户外运动 ${yearLength} 年，下面列表展示的是 ${year} 年的数据`;
@@ -31,7 +31,7 @@ const SWIM_TITLE = IS_CHINESE ? '游泳' : 'Swim';
 
 const RIDE_TITLE = IS_CHINESE ? '骑行' : 'Ride';
 const INDOOR_RIDE_TITLE = IS_CHINESE ? '室内骑行' : 'Indoor Ride';
-const HIKE_TITLE = IS_CHINESE ? '徒步' : 'Hike';
+const HIKE_TITLE = IS_CHINESE ? '远足' : 'Hike';
 const ROWING_TITLE = IS_CHINESE ? '划船' : 'Rowing';
 const ROAD_TRIP_TITLE = IS_CHINESE ? '自驾' : 'RoadTrip';
 const FLIGHT_TITLE = IS_CHINESE ? '飞行' : 'Flight';

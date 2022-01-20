@@ -14,7 +14,7 @@ pyyaml
 aiofiles
 cloudscraper
 bs4
-pycrypto
+# pycrypto
 html.parser
 aiofiles
 lxml
