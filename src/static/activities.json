@@ -12,5 +12,19 @@
 "average_heartrate": null,
 "average_speed": 1.521,
 "streak": 1
+},
+{
+"run_id": 6558741152,
+"name": "Go back hostel",
+"distance": 2627.1,
+"moving_time": "0:28:13",
+"type": "Walk",
+"start_date": "2022-01-21 15:13:45+00:00",
+"start_date_local": "2022-01-21 23:13:45",
+"location_country": "\u5d07\u57fa\u5b78\u9662 Chung Chi College, \u65b0\u8ce4\u6a4b New Engineering Bridge, \u99ac\u6599\u6c34 Ma Liu Shui, \u8d64\u6ce5\u576a\u6751 Chek Nai Ping Village, \u6c99\u7530\u5340 Sha Tin District, \u65b0\u754c New Territories, \u9999\u6e2f Hong Kong, \u4e2d\u56fd",
+"summary_polyline": "izxgCiuaxT^hJCAB?@DD?VGXQ@IHIPa@HIVMN_@?KGCEGI_@DYSQC_@EKOO?Ie@Qi@YAEFO?Eq@FWC_@W[Ku@c@k@k@[MIMy@_AGOSKOGWAe@IGI?_@GICMYe@K[MQOKSEq@DOAKIWA[OKIEKEC_@Is@Wk@KI?ICYAe@B]AQBc@EU?SFYDQ?KC_@B[NOBi@EMBQ@[HMJaAX?BQ?i@He@Li@Hu@\\[H}@r@SLi@p@ERKFKL?@@?OHQRi@z@_@`@MVUPCHMHQ`@QVGPw@z@[h@o@~@i@dASXMh@Yx@Al@DVAR@BFBJLF@DB@\\Lj@B`@BB^RXTBHb@\\XBXKX@PETNF?LTTLTTXd@NBJNPHLZ@^UDGDKJGNo@|@[Z_@LG?KWECKBCAESAK@?ECC?KDGNANK\\",
+"average_heartrate": null,
+"average_speed": 1.552,
+"streak": 1
 }
 ]
