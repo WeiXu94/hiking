@@ -116,11 +116,8 @@ jobs:
         run: git config --global --add safe.directory /github/workspace
 
       - name: Push new runs
-        uses: github-actions-x/commit@v2.6
-        with:
-          github-token: ${{ secrets.G_TOKEN }}
-          commit-message: "Add new workouts"
-          files: activities src/static/ scripts/ assets/ GPX_OUT/
-          rebase: 'true'
-          name: ${{ env.GITHUB_NAME }}
-          email: ${{ env.GITHUB_EMAIL }}
+        run: |
+          git config --local user.email "${{ env.GITHUB_EMAIL }}"
+          git config --local user.name "${{ env.GITHUB_EMAIL }}"
+          git commit -a -m 'docs: update readme.md' || echo "nothing to commit"
+          git push || echo "nothing to push"
