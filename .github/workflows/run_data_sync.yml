@@ -25,7 +25,7 @@ env:
   MIN_GRID_DISTANCE: 10 # change min distance here
   TITLE_GRID: Over 10km Workouts
   GITHUB_NAME: WeiXu94
-  GITHUB_EMAIL: 18810185614@163.com
+  GITHUB_EMAIL: weixu1026@gmail.com
 
 jobs:
   sync:
