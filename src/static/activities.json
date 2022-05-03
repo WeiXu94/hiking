@@ -166,5 +166,19 @@
 "average_heartrate": null,
 "average_speed": 1.42,
 "streak": 1
+},
+{
+"run_id": 7074735328,
+"name": "Office",
+"distance": 2854.1,
+"moving_time": "0:33:25",
+"type": "Walk",
+"start_date": "2022-05-02 09:21:46+00:00",
+"start_date_local": "2022-05-02 17:21:46",
+"location_country": "\u806f\u5408\u82d1 U.C. Staff Residence, \u58eb\u6797\u8def Residence Road, \u99ac\u6599\u6c34 Ma Liu Shui, \u8d64\u6ce5\u576a\u6751 Chek Nai Ping Village, \u6c99\u7530\u5340 Sha Tin District, \u65b0\u754c New Territories, \u9999\u6e2f Hong Kong, \u4e2d\u56fd",
+"summary_polyline": "kpzgCcw`xTDQVCHKCGAe@Q_@AK_A}@KECI?EWGOO]S_@GYRM?MD?FDAYCMMMGMMCWKGKSQGKUMMG_@?MCI@OEKQIYEIGCKDa@Ne@HONq@JULQVo@\\k@Re@LI`@m@`@c@Pe@PQ`@q@JUXUXq@\\g@l@s@PWBMPOHCBGNGJQRWLEJDBATWRM@K`@I`@WPCZOHMh@Ar@OZEH?TG`@@FCHOZIfA?P@^Qp@?LKLCX?NBHARGV@PAPFJ?DCf@BHHb@HXHRJLBNT`@@ZPR?x@RV?\\TPBZZFNBj@FFRHBT?^DJLFFRF@VETFf@^NP\\LJRRNTBDFH@\\d@VFNJVJJEHBLJFAXDTJLB\\d@LBFCN@PJBDNBDDBA\\{@Gk@GQ?SBELq@F?O@?C@JCGWD?ECALDCA?DC@?HFNDD?VWn@Pi@B?E@B?CB@IBIHADIIL?GQd@Eh@?NBJLVNi@AASRGR?v@Ld@ET@BGLIXQXON]TITKJCJGFHL@FGAKL@AE?VBVAHG@?CBf@JCA\\]DABDHIYHAD",
+"average_heartrate": null,
+"average_speed": 1.423,
+"streak": 1
 }
 ]
