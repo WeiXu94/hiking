@@ -37,7 +37,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v1
         with:
-          python-version: 3.6
+          python-version: 3.7
 
       # from pdm
       - name: Set Variables
@@ -119,5 +119,5 @@ jobs:
         run: |
           git config --local user.email "${{ env.GITHUB_EMAIL }}"
           git config --local user.name "${{ env.GITHUB_EMAIL }}"
-          git commit -a -m 'docs: update readme.md' || echo "nothing to commit"
+          git commit -a -m 'Add new workouts' || echo "nothing to commit"
           git push || echo "nothing to push"
