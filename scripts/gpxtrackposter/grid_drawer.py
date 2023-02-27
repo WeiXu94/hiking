@@ -58,7 +58,6 @@ class GridDrawer(TracksDrawer):
 
         date_title = f"{str(tr.start_time_local)[:10]} {str_length}km"
         for line in project(tr.bbox(), size, offset, tr.polylines):
-
             distance1 = self.poster.special_distance["special_distance"]
             distance2 = self.poster.special_distance["special_distance2"]
             has_special = distance1 < tr.length / 1000 < distance2
