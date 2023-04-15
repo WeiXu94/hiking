@@ -53,6 +53,7 @@ class Generator:
                 filters = {"before": datetime.datetime.utcnow()}
 
         for run_activity in self.client.get_activities(**filters):
+            run_activity.source = "strava"
             created = update_or_create_activity(self.session, run_activity)
             if created:
                 sys.stdout.write("+")
@@ -62,9 +63,9 @@ class Generator:
 
         self.session.commit()
 
-    def sync_from_gpx(self, gpx_dir):
+    def sync_from_data_dir(self, data_dir, file_suffix="gpx"):
         loader = track_loader.TrackLoader()
-        tracks = loader.load_tracks(gpx_dir)
+        tracks = loader.load_tracks(data_dir, file_suffix=file_suffix)
         print(f"load {len(tracks)} tracks")
         if not tracks:
             print("No tracks found.")

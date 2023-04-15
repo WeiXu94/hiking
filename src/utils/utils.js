@@ -1,16 +1,23 @@
 import * as mapboxPolyline from '@mapbox/polyline';
-import { WebMercatorViewport } from 'react-map-gl';
+import gcoord from 'gcoord';
+import { WebMercatorViewport } from 'react-map-gl'
 import { chinaGeojson } from '../static/run_countries';
+import { chinaCities } from '../static/city';
 import {
   MUNICIPALITY_CITIES_ARR,
+  NEED_FIX_MAP,
   RUN_TITLES,
   MAIN_COLOR,
   RIDE_COLOR,
+  VIRTUAL_RIDE_COLOR,
   HIKE_COLOR,
   SWIM_COLOR,
   ROWING_COLOR,
   ROAD_TRIP_COLOR,
-  FLIGHT_COLOR
+  FLIGHT_COLOR,
+  RUN_COLOR,
+  KAYAKING_COLOR,
+  SNOWBOARD_COLOR,
 } from './const';
 
 const EARTH_RADIUS = 6378.137 * 1000; // in meters
@@ -33,17 +40,27 @@ const formatPace = (d) => {
   const pace = (1000.0 / 60.0) * (1.0 / d);
   const minutes = Math.floor(pace);
   const seconds = Math.floor((pace - minutes) * 60.0);
-  return `${minutes}:${seconds.toFixed(0).toString().padStart(2, '0')}`;
+  return `${minutes}'${seconds.toFixed(0).toString().padStart(2, '0')}"`;
 };
 
-const formatRunTime = (distance,pace) => {
-  if (Number.isNaN(distance) || Number.isNaN(pace)) {
-    return '0min';
+const convertMovingTime2Sec = (moving_time) => {
+  if (!moving_time) {
+    return 0;
   }
-  const formatPace = (1000.0 / 60.0) * (1.0 / pace);
-  const minutes = Math.floor(formatPace * distance);
+  // moving_time : '2 days, 12:34:56' or '12:34:56';
+  const splits = moving_time.split(', ');
+  const days = splits.length == 2 ? parseInt(splits[0]) : 0;
+  const time = splits.splice(-1)[0]
+  const [hours, minutes, seconds] = time.split(':').map(Number);
+  const totalSeconds = (((days * 24) + hours) * 60 + minutes) * 60 + seconds;
+  return totalSeconds;
+}
+
+const formatRunTime = (moving_time) => {
+  const totalSeconds = convertMovingTime2Sec(moving_time)
+  const seconds = totalSeconds % 60
+  const minutes = (totalSeconds-seconds) / 60
   if (minutes === 0) {
-    const seconds = Math.floor((formatPace * distance - minutes) * 60.0);
     return seconds + 's';
   }
   return minutes + 'min';
@@ -56,16 +73,34 @@ const scrollToMap = () => {
   window.scroll(rect.left + window.scrollX, rect.top + window.scrollY);
 };
 
+const cities = chinaCities.map((c) => c.name);
 // what about oversea?
 const locationForRun = (run) => {
-  const location = run.location_country;
+  let location = run.location_country;
   let [city, province, country] = ['', '', ''];
   if (location) {
     // Only for Chinese now
-    const cityMatch = location.match(/[\u4e00-\u9fa5]*(市|自治州)/);
-    const provinceMatch = location.match(/[\u4e00-\u9fa5]*(省|自治区)/);
+    // should fiter 臺灣
+    if(location.indexOf('臺灣') > -1){
+      const taiwan = '台湾';
+      location = location.replace('臺灣', taiwan);
+      const _locArr = location.split(',').map(item=>item.trim());
+      const _locArrLen = _locArr.length;
+      // directly repalce last item with 中国
+      _locArr[_locArrLen-1] = '中国';
+      // if location not contain '台湾省', insert it before zip code(posistion is _locArrLen-2)
+      if(_locArr.indexOf(`${taiwan}省`) === -1){
+        _locArr.splice(_locArrLen-2, 0, `${taiwan}省`)
+      }
+      location = _locArr.join(',');
+    }
+    const cityMatch = location.match(/[\u4e00-\u9fa5]{2,}(市|自治州)/);
+    const provinceMatch = location.match(/[\u4e00-\u9fa5]{2,}(省|自治区)/);
     if (cityMatch) {
       [city] = cityMatch;
+      if (!cities.includes(city)) {
+        city = ''
+      }
     }
     if (provinceMatch) {
       [province] = provinceMatch;
@@ -125,7 +160,7 @@ const pathForRun = (run) => {
     const c = mapboxPolyline.decode(run.summary_polyline);
     // reverse lat long for mapbox
     c.forEach((arr) => {
-      [arr[0], arr[1]] = [arr[1], arr[0]];
+      [arr[0], arr[1]] = !NEED_FIX_MAP ? [arr[1], arr[0]] : gcoord.transform([arr[1], arr[0]], gcoord.GCJ02, gcoord.WGS84);
     });
     return filterPoints(c);
   } catch (err) {
@@ -158,23 +193,16 @@ const geoJsonForRuns = (runs) => ({
 
 const geoJsonForMap = () => chinaGeojson;
 
-const titleForRun = (run) => {
-  const runDistance = run.distance / 1000;
-  const runHour = +run.start_date_local.slice(11, 13);
-  const type = run.type;
+const titleForType = (type) => {
   switch (type) {
     case 'Run':
-      if (runDistance > 20 && runDistance < 40) {
-        return RUN_TITLES.HALF_MARATHON_RUN_TITLE;
-      }
-      if (runDistance >= 40) {
-        return RUN_TITLES.FULL_MARATHON_RUN_TITLE;
-      }
       return RUN_TITLES.RUN_TITLE;
     case 'Ride':
       return RUN_TITLES.RIDE_TITLE;
     case 'Indoor Ride':
       return RUN_TITLES.INDOOR_RIDE_TITLE;
+    case 'VirtualRide':
+      return RUN_TITLES.VIRTUAL_RIDE_TITLE;
     case 'Hike':
       return RUN_TITLES.HIKE_TITLE;
     case 'Rowing':
@@ -185,18 +213,38 @@ const titleForRun = (run) => {
       return RUN_TITLES.ROAD_TRIP_TITLE;
     case 'Flight':
       return RUN_TITLES.FLIGHT_TITLE;
+    case 'Kayaking':
+      return RUN_TITLES.KAYAKING_TITLE;
+    case 'Snowboard':
+      return RUN_TITLES.SNOWBOARD_TITLE;
     default:
       return RUN_TITLES.RUN_TITLE;
   }
+}
+
+const titleForRun = (run) => {
+  const type = run.type;
+  if (type == 'Run'){
+      const runDistance = run.distance / 1000;
+      if (runDistance >= 40) {
+        return RUN_TITLES.FULL_MARATHON_RUN_TITLE;
+      }
+      else if (runDistance > 20) {
+        return RUN_TITLES.HALF_MARATHON_RUN_TITLE;
+      }
+  }
+  return titleForType(type);
 };
 
 const colorFromType = (workoutType) => {
   switch (workoutType) {
     case 'Run':
-      return MAIN_COLOR;
+      return RUN_COLOR;
     case 'Ride':
     case 'Indoor Ride':
       return RIDE_COLOR;
+    case 'VirtualRide':
+      return VIRTUAL_RIDE_COLOR;
     case 'Hike':
       return HIKE_COLOR;
     case 'Rowing':
@@ -207,6 +255,10 @@ const colorFromType = (workoutType) => {
       return ROAD_TRIP_COLOR;
     case 'Flight':
       return FLIGHT_COLOR;
+    case 'Kayaking':
+      return KAYAKING_COLOR;
+    case 'Snowboard':
+      return SNOWBOARD_COLOR;
     default:
       return MAIN_COLOR;
   }
@@ -284,6 +336,7 @@ export {
   geoJsonForRuns,
   geoJsonForMap,
   titleForRun,
+  titleForType,
   filterYearRuns,
   filterCityRuns,
   filterTitleRuns,
@@ -294,4 +347,5 @@ export {
   filterTypeRuns,
   colorFromType,
   formatRunTime,
+  convertMovingTime2Sec,
 };

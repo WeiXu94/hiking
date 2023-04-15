@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 import argparse
 import json
 import logging
@@ -97,7 +94,10 @@ def run(refresh_token):
             # ignore NTC record
             app_id = activity["app_id"]
             activity_id = activity["id"]
-            if app_id == "com.nike.ntc.brand.ios":
+            if (
+                app_id == "com.nike.ntc.brand.ios"
+                or app_id == "com.nike.ntc.brand.droid"
+            ):
                 logger.info(f"Ignore NTC record {activity_id}")
                 continue
 
@@ -378,7 +378,7 @@ def make_new_gpxs(files):
     gpx_files = []
     tracks_list = []
     for file in files:
-        with open(file, "r") as f:
+        with open(file, "rb") as f:
             try:
                 json_data = json.loads(f.read())
             except:
