@@ -43,3 +43,25 @@ def make_strava_client(client_id, client_secret, refresh_token):
     )
     client.access_token = refresh_response["access_token"]
     return client
+
+def filter_gpx_outlier(gpx_file):
+    with open(gpx_file, "r") as gpx_file:
+        gpx = gpxpy.parse(gpx_file)
+
+    for track in gpx.tracks:
+        for segment in track.segments:
+            new_points = []
+            last_point = None
+            for point in segment.points:
+                if last_point and (
+                    point.distance_2d(last_point) > 1000
+                    or point.distance_2d(last_point) == 0
+                ):
+                    # 跳过此点，因为距离上一个点太远
+                    continue
+                new_points.append(point)
+                last_point = point
+            segment.points = new_points
+
+    with open('gpx_out/new.gpx', 'w') as output_file:
+        output_file.write(gpx.to_xml())

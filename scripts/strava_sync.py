@@ -11,7 +11,7 @@ from generator import Generator
 def run_strava_sync(client_id, client_secret, refresh_token):
     generator = Generator(SQL_FILE)
     generator.set_strava_config(client_id, client_secret, refresh_token)
-    # if you want to refresh data change False to True
+    # if you want to refresh data, change False to True
     generator.sync(False)
 
     activities_list = generator.load()

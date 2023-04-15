@@ -13,6 +13,9 @@ import {
   FLIGHT_COLOR
 } from './const';
 
+const EARTH_RADIUS = 6378.137 * 1000; // in meters
+const ONE_DEGREE = (2 * Math.PI * EARTH_RADIUS) / 360;
+
 const titleForShow = (run) => {
   const date = run.start_date_local.slice(0, 11);
   const distance = (run.distance / 1000.0).toFixed(1);
@@ -93,6 +96,30 @@ const intComma = (x = '') => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
+const distance = (point1, point2) => {
+    const coef = Math.cos(point1[1] * Math.PI / 180);
+    const x = point1[1] - point2[1];
+    const y = (point1[0] - point2[0]) * coef;
+    
+    const distance_2d = Math.sqrt(x * x + y * y) * ONE_DEGREE;
+    return distance_2d
+}
+
+const filterPoints = (points) =>{
+    const newPoints = [];
+    let lastPoint = null;
+    for (let k = 0; k < points.length; k++) {
+        const point = points[k];
+        if (lastPoint && (distance(point,lastPoint) > 2000 || distance(point,lastPoint) === 0)) {
+            // Skip this point because it's too far from the previous one
+            continue;
+        }
+        newPoints.push(point);
+        lastPoint = point;
+    }
+    return newPoints
+}
+
 const pathForRun = (run) => {
   try {
     const c = mapboxPolyline.decode(run.summary_polyline);
@@ -100,7 +127,7 @@ const pathForRun = (run) => {
     c.forEach((arr) => {
       [arr[0], arr[1]] = [arr[1], arr[0]];
     });
-    return c;
+    return filterPoints(c);
   } catch (err) {
     return [];
   }
