@@ -9,7 +9,6 @@ const useSiteMetadata = () => {
             siteTitle
             siteUrl
             description
-            keywords
             logo
             navLinks {
               name
