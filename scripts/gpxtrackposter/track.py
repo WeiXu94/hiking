@@ -115,13 +115,13 @@ class Track:
             last_point = point
         return new_points
 
-    def _distance_2d(point1, point2):
+    def _distance_2d(self, point1, point2):
         EARTH_RADIUS = 6378.137 * 1000
         ONE_DEGREE = (2 * math.PI * EARTH_RADIUS) / 360
 
-        coef = math.cos(point1[1] * math.pi / 180)
-        x = point1[1] - point2[1]
-        y = (point1[0] - point2[0]) * coef
+        coef = math.cos(point1[0] * math.pi / 180)
+        x = point1[0] - point2[0]
+        y = (point1[1] - point2[1]) * coef
         distance_2d = math.sqrt(x * x + y * y) * ONE_DEGREE
         return distance_2d
 
