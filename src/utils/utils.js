@@ -145,7 +145,7 @@ const filterPoints = (points) =>{
     let lastPoint = null;
     for (let k = 0; k < points.length; k++) {
         const point = points[k];
-        if (lastPoint && (distance(point,lastPoint) > 2000 || distance(point,lastPoint) === 0)) {
+        if (lastPoint && (distance(point,lastPoint) > 1000 || distance(point,lastPoint) === 0)) {
             // Skip this point because it's too far from the previous one
             continue;
         }
