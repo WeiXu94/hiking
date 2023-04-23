@@ -117,7 +117,7 @@ class Track:
 
     def _distance_2d(self, point1, point2):
         EARTH_RADIUS = 6378.137 * 1000
-        ONE_DEGREE = (2 * math.PI * EARTH_RADIUS) / 360
+        ONE_DEGREE = (2 * math.pi * EARTH_RADIUS) / 360
 
         coef = math.cos(point1[0] * math.pi / 180)
         x = point1[0] - point2[0]
