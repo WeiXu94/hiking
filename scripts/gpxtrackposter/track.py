@@ -7,7 +7,7 @@
 import datetime
 import os
 from collections import namedtuple
-
+import math
 import gpxpy as mod_gpxpy
 import lxml
 import polyline
@@ -86,7 +86,12 @@ class Track:
         self.length = float(activity.distance)
         summary_polyline = activity.summary_polyline
         polyline_data = polyline.decode(summary_polyline) if summary_polyline else []
-        self.polylines = [[s2.LatLng.from_degrees(p[0], p[1]) for p in polyline_data]]
+        self.polylines = [
+            [
+                s2.LatLng.from_degrees(p[0], p[1])
+                for p in self._filter_track_outliers(polyline_data)
+            ]
+        ]
 
     def bbox(self):
         """Compute the smallest rectangle that contains the entire track (border box)."""
@@ -95,6 +100,30 @@ class Track:
             for latlng in line:
                 bbox = bbox.union(s2.LatLngRect.from_point(latlng.normalized()))
         return bbox
+
+    def _filter_track_outliers(self, points):
+        new_points = []
+        last_point = None
+        for point in points:
+            if last_point and (
+                self._distance_2d(point, last_point) > 1000
+                or self._distance_2d(point, last_point) == 0
+            ):
+                # skip this point if too far
+                continue
+            new_points.append(point)
+            last_point = point
+        return new_points
+
+    def _distance_2d(point1, point2):
+        EARTH_RADIUS = 6378.137 * 1000
+        ONE_DEGREE = (2 * math.PI * EARTH_RADIUS) / 360
+
+        coef = math.cos(point1[1] * math.pi / 180)
+        x = point1[1] - point2[1]
+        y = (point1[0] - point2[0]) * coef
+        distance_2d = math.sqrt(x * x + y * y) * ONE_DEGREE
+        return distance_2d
 
     @staticmethod
     def __make_run_id(time_stamp):
