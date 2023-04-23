@@ -4,7 +4,7 @@
 *.pyc
 node_modules
 yarn-error.log
-
+/.conda
 /public
 # Build directory
 /build

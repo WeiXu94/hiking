@@ -24,7 +24,7 @@ numpy
 tzlocal
 
 bs4
-pycrypto
+# pycrypto
 html.parser
 aiofiles
 # if you need to import kml file
